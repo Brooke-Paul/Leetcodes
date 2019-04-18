@@ -10,7 +10,7 @@ import java.util.Map;
  * @Date 2019-04-18
  * @Version 1.0
  */
-public class LeeCode1 {
+public class LeetCode1 {
     public static void main(String[] args) {
         int[] nums = {3,6,8,10};
         int target = 11;
@@ -66,5 +66,6 @@ public class LeeCode1 {
         }
         throw new IllegalArgumentException("no two sum");
     }
+
 
 }
