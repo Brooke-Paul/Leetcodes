@@ -15,13 +15,13 @@ import java.util.Set;
  * @Version 1.0
  */
 public class LeetCode3 {
-    private static Set<Character> set = new HashSet<>();
+
 
     public static int lengthOfString(String s) {
         int n = s.length();
         int num = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
+            for (int j = i + 1; j <= n; j++) {
                 if (unique(s, i, j)) {
                     num = Math.max(num, j - i);
                 }
@@ -31,7 +31,7 @@ public class LeetCode3 {
     }
 
     public static boolean unique(String s, int start, int end) {
-
+        Set<Character> set = new HashSet<>();
         for (int i = start; i < end; i++) {
             Character character = s.charAt(i);
             if (set.contains(character)) {
@@ -39,17 +39,20 @@ public class LeetCode3 {
             }
             set.add(character);
         }
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            System.out.print("start " + start + " end " + end + " " +iterator.next());
+        }
+        System.out.println();
         return true;
     }
 
     public static void main(String[] args) {
-        String str = "abcdbcdasadqweuytqfwduhasgdasfhasfkasfasj";
+//        String str = "pwwkew";
+        String str = "abcdbcdasadqweuy";
         System.out.println(lengthOfString(str));
 
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()) {
-            System.out.print(iterator.next());
-        }
+
     }
 
 
