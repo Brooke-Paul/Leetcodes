@@ -6,51 +6,71 @@ import java.util.Set;
 
 /**
  * @Author xuetao
- * @Description: 1.给定一个字符串，找出不含有重复字符的 最长子串 的长度。
+ * @Description: 1.给定两个大小为m和n的有序数组num1， num2，请找出两个有序数组的中位数，要求算法的时间复杂度为O(log(m+n))
  * 示例：
- * 给定 "abcabcbb" ，没有重复字符的最长子串是 "abc" ，那么长度就是3。
- * 给定 "bbbbb" ，最长的子串就是 "b" ，长度是1。
- * 给定 "pwwkew" ，最长子串是 "wke" ，长度是3。请注意答案必须是一个子串， "pwke" 是 子序列 而不是子串。
+ * num1 = [1, 2, 5, 7]
+ * num2 = [3, 4, 6]
+ * 中位数为4.0
  * @Date 2019-04-18
  * @Version 1.0
  */
 public class LeetCode4 {
 
 
-    public static int lengthOfString(String s) {
-        int n = s.length();
-        int num = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j <= n; j++) {
-                if (unique(s, i, j)) {
-                    num = Math.max(num, j - i);
+    public static double findMedianSortedArrays(int[] A, int[] B) {
+        int m = A.length;
+        int n = B.length;
+        // to ensure m<=n
+        if (m > n) {
+            int[] temp = A;
+            A = B;
+            B = temp;
+            int tmp = m;
+            m = n;
+            n = tmp;
+        }
+        int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
+        while (iMin <= iMax) {
+            int i = (iMin + iMax) / 2;
+            int j = halfLen - i;
+            if (i < iMax && B[j - 1] > A[i]) {
+                // i is too small
+                iMin = iMin + 1;
+            } else if (i > iMin && A[i - 1] > B[j]) {
+                // i is too big
+                iMax = iMax - 1;
+            } else { // i is perfect
+                int maxLeft = 0;
+                if (i == 0) {
+                    maxLeft = B[j - 1];
+                } else if (j == 0) {
+                    maxLeft = A[i - 1];
+                } else {
+                    maxLeft = Math.max(A[i - 1], B[j - 1]);
                 }
-            }
-        }
-        return num;
-    }
+                if ((m + n) % 2 == 1) {
+                    return maxLeft;
+                }
 
-    public static boolean unique(String s, int start, int end) {
-        Set<Character> set = new HashSet<>();
-        for (int i = start; i < end; i++) {
-            Character character = s.charAt(i);
-            if (set.contains(character)) {
-                return false;
+                int minRight = 0;
+                if (i == m) {
+                    minRight = B[j];
+                } else if (j == n) {
+                    minRight = A[i];
+                } else {
+                    minRight = Math.min(B[j], A[i]);
+                }
+
+                return (maxLeft + minRight) / 2.0;
             }
-            set.add(character);
         }
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()) {
-            System.out.print("start " + start + " end " + end + " " +iterator.next());
-        }
-        System.out.println();
-        return true;
+        return 0.0;
     }
 
     public static void main(String[] args) {
-//        String str = "pwwkew";
-        String str = "abcdbcdasadqweuy";
-        System.out.println(lengthOfString(str));
+        int[] num1 = new int[]{1, 2, 5, 7};
+        int[] num2 = new int[]{3, 4, 6};
+        System.out.println(findMedianSortedArrays(num1, num2));
 
 
     }
