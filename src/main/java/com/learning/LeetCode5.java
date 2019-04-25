@@ -13,7 +13,7 @@ public class LeetCode5 {
     private int lo, maxLen;
 
     public static void main(String[] args) {
-        String str = "abaccab";
+        String str = "caba";
         LeetCode5 leetCode5 = new LeetCode5();
         System.out.println(leetCode5.longgestStr(str));
     }
@@ -26,7 +26,9 @@ public class LeetCode5 {
         int len = s.length();
 
         for (int i = 0; i < len - 1; i++) {
+            // 判断奇数的情况
             extendPalindrome(s, i, i);
+            // 判断偶数的情况
             extendPalindrome(s, i, i + 1);
         }
         return s.substring(lo, lo + maxLen);
