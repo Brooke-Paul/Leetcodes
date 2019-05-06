@@ -14,10 +14,33 @@ public class LeetCode11 {
     public static void main(String[] args) {
         int[] height = {2, 5, 8, 1, 3, 9};
         //24
-        System.out.println(maxArea(height));
+        System.out.println(maxArea1(height));
+        System.out.println(maxArea2(height));
     }
 
-    public static int maxArea(int[] height) {
+    /**
+     * 方法一： 暴力求解
+     *
+     * @param height
+     * @return
+     */
+    public static int maxArea1(int[] height) {
+        int max = 0;
+        int r = height.length - 1;
+        for (int i = 0; i <= r; i++) {
+            for (int j = i + 1; j <= r; j++) {
+                max = Math.max(max, (j - i) * Math.min(height[i], height[j]));
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 方法二：双指针，朝着area可能变大的方向搜索
+     * @param height
+     * @return
+     */
+    public static int maxArea2(int[] height) {
         int max = 0;
         int l = 0;
         int r = height.length - 1;
