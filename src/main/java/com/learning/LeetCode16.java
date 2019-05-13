@@ -37,7 +37,7 @@ public class LeetCode16 {
         }
         Arrays.sort(nums);
         int min = Integer.MAX_VALUE;
-        int i, j = 0, m = 0, compare, result = 0;
+        int i, j, m, compare, result = 0;
         for (i = 0; i < length - 2; i++) {
             j = i + 1;
             m = length - 1;
