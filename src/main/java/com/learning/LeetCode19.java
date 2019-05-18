@@ -118,10 +118,6 @@ class Node<K, V> {
     V value;
     Node next;
 
-    Node() {
-
-    }
-
     Node(int hash, K key, V value, Node<K, V> next) {
         this.hash = hash;
         this.key = key;
@@ -142,9 +138,4 @@ class Node<K, V> {
         value = newValue;
         return oldValue;
     }
-
-//    public final int hashCode() {
-//        return Objects.hashCode(key) ^ Objects.hashCode(value);
-//    }
-
 }
