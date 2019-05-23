@@ -27,9 +27,12 @@ public class LeetCode22 {
     }
 
     public static void constructBrackets(List<String> strings, int left, int right, String s) {
+
+        //3 > 2   3 > 1    3 > 0
         if (left > 0) {
             constructBrackets(strings, left - 1, right, s + "(");
         }
+        //3 > 2   3 > 1    3 > 0
         if (right > left) {
             constructBrackets(strings, left, right - 1, s + ")");
         }
