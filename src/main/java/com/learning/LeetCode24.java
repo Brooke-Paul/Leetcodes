@@ -28,7 +28,8 @@ public class LeetCode24 {
         node.next.next = new Node(Objects.hashCode(5), 5, 5, null);
         node.next.next.next = new Node(Objects.hashCode(6), 6, 6, null);
         node.next.next.next.next = new Node(Objects.hashCode(7), 7, 7, null);
-        Node result = changeLinkedSort(node);
+//        Node result = changeLinkedSort(node);
+        Node result = swapPairs(node);
         while (result != null) {
             System.out.println(result.value);
             result = result.next;
@@ -61,5 +62,23 @@ public class LeetCode24 {
             head.next = node;
         }
         return sort.next;
+    }
+
+
+    /**
+     * 第二种方法， 递归交换
+     *
+     * @param node
+     * @return
+     */
+    public static Node swapPairs(Node node) {
+        if (node == null || node.next == null) {
+            return node;
+        }
+        Node second = node.next;
+        Node third = second.next;
+        second.next = node;
+        node.next = swapPairs(third);
+        return second;
     }
 }
