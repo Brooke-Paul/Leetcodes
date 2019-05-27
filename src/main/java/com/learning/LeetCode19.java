@@ -1,5 +1,7 @@
 package com.learning;
 
+import com.learning.entity.Node;
+
 import java.util.Objects;
 
 /**
@@ -112,30 +114,3 @@ public class LeetCode19 {
 
 }
 
-class Node<K, V> {
-    int hash;
-    K key;
-    V value;
-    Node next;
-
-    Node(int hash, K key, V value, Node<K, V> next) {
-        this.hash = hash;
-        this.key = key;
-        this.value = value;
-        this.next = next;
-    }
-
-    public final K getKey() {
-        return key;
-    }
-
-    public final V getValue() {
-        return value;
-    }
-
-    public final V setValue(V newValue) {
-        V oldValue = value;
-        value = newValue;
-        return oldValue;
-    }
-}
