@@ -45,9 +45,28 @@ public class LeetCode26 {
 
     /**
      * 遍历数组，remove equals num
+     *
      * @param args
      */
     public static void main(String[] args) {
+        int[] nums = {1, 2, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7};
+        int i = removeDuplicates(nums);
 
+        for (int j = 0; j <= i; j++) {
+            System.out.println(nums[j]);
+        }
+    }
+
+
+    public static int removeDuplicates(int[] nums) {
+        int length = nums.length;
+        int i = 0;
+        for (int j = 0; j < length; j++) {
+            if (nums[i] != nums[j]) {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i;
     }
 }
