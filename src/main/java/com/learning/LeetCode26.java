@@ -52,7 +52,7 @@ public class LeetCode26 {
         int[] nums = {1, 2, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7};
         int i = removeDuplicates(nums);
 
-        for (int j = 0; j <= i; j++) {
+        for (int j = 0; j < i; j++) {
             System.out.println(nums[j]);
         }
     }
@@ -67,6 +67,6 @@ public class LeetCode26 {
                 nums[i] = nums[j];
             }
         }
-        return i;
+        return i + 1;
     }
 }
