@@ -32,17 +32,53 @@ import java.util.Map;
 public class LeetCode30 {
     public static void main(String[] args) {
         String s = "barfoothefoobarman";
-        String[] words = {"foo","bar"};
+        String[] words = {"foo", "bar"};
 
         List<Integer> integers = matchStr(s, words);
 
         if (integers != null) {
-            integers.forEach(i -> System.out.println(i)
-            );
+            integers.forEach(i -> System.out.println(i));
         }
 
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                if (j == i) {
+//                    continue;
+//                }
+//                for (int x = 0; x < 4; x++) {
+//                    if (x == i || x == j) {
+//                        continue;
+//                    }
+//                    for (int y = 0; y < 4; y++) {
+//                        if (y == i || y == j || y == x) {
+//                            continue;
+//                        }
+//                        System.out.println(i + "" + j + "" + x + "" + y);
+//                    }
+//                }
+//            }
+//        }
+        List<StringBuffer> stringBuffers = new ArrayList<>();
+        for (int i = 0; i < words.length; i++) {
+            List<Integer> list = new ArrayList<>();
+            StringBuffer stringBuffer = new StringBuffer();
+            stringBuffer.append(words[i]);
+            list.add(i);
+            matchStr(words, list, stringBuffer, 1, stringBuffers);
+
+        }
+        if (null != stringBuffers) {
+            stringBuffers.forEach(j -> System.out.println("s ===" + s + ":::::" + j + " " + s.indexOf(j.toString())));
+        }
     }
 
+    /**
+     * 方法1： 字符串substring 与 map 配合解决
+     *
+     * @param string
+     * @param words
+     * @return
+     */
     public static List<Integer> matchStr(String string, String[] words) {
         if (words == null || words.length == 0) {
             return null;
@@ -88,5 +124,32 @@ public class LeetCode30 {
 
     }
 
+    /**
+     * 方法2： 按照排列组合的思想获取每一层字串，避免重复
+     *
+     * @param words
+     * @param list
+     * @param stringBuffer
+     * @param n
+     * @param result
+     */
+    public static void matchStr(String[] words, List<Integer> list, StringBuffer stringBuffer, int n, List<StringBuffer> result) {
+        for (int i = 0; i < words.length; i++) {
+            if (list.contains(i)) {
+                continue;
+            }
+            List<Integer> integerList = new ArrayList<>();
+            integerList.addAll(list);
+            StringBuffer stringBuffer1 = new StringBuffer();
+            stringBuffer1.append(stringBuffer + words[i]);
 
+            if (n < words.length - 1) {
+                integerList.add(i);
+                matchStr(words, integerList, stringBuffer1, n + 1, result);
+            } else {
+                result.add(stringBuffer1);
+            }
+        }
+
+    }
 }
