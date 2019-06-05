@@ -36,9 +36,6 @@ public class LeetCode32 {
         if (string == null || string.length() < 1) {
             return 0;
         }
-
-        Map map = new HashMap();
-        map.put("(", ")");
         int s = 0;
         int sum = 0;
         int length = string.length();
