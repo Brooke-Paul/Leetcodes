@@ -1,5 +1,7 @@
 package com.learning;
 
+import java.util.*;
+
 /**
  * @Author xuetao
  * @Description: 判断一个 9x9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
@@ -64,6 +66,45 @@ public class LeetCode36 {
      * @param args
      */
     public static void main(String[] args) {
+        String array[][] = {
+                {"9", "3", ".", ".", "7", ".", ".", ".", "."},
+                {"6", ".", ".", "1", "9", "5", ".", ".", "."},
+                {".", "9", "8", ".", ".", ".", ".", "6", "."},
+                {"8", ".", ".", ".", "6", ".", ".", ".", "3"},
+                {"4", ".", ".", "8", ".", "3", ".", ".", "1"},
+                {"7", ".", ".", ".", "2", ".", ".", ".", "6"},
+                {".", "6", ".", ".", ".", ".", "2", "8", "."},
+                {".", ".", ".", "4", "1", "9", ".", ".", "5"},
+                {".", ".", ".", ".", "8", ".", ".", "7", "9"}
+        };
+        System.out.println(isValidSudoku(array));
+    }
 
+    public static boolean isValidSudoku(String[][] array) {
+        Map[] row = new Map[9];
+        Map[] col = new Map[9];
+        Map[] cell = new Map[9];
+        for (int i = 0; i < 9; i++) {
+            row[i] = new HashMap(9);
+            col[i] = new HashMap(9);
+            cell[i] = new HashMap(9);
+        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                String str = array[i][j];
+                int cindex = 3 * (i / 3) + j / 3;
+                if (".".equals(str)) {
+                    continue;
+                }
+                if (row[i].containsValue(str) || col[j].containsValue(str) || cell[cindex].containsValue(str)) {
+                    return false;
+                } else {
+                    row[i].put(str, str);
+                    col[j].put(str, str);
+                    cell[cindex].put(str, str);
+                }
+            }
+        }
+        return true;
     }
 }
