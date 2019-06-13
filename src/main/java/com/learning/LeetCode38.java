@@ -32,7 +32,7 @@ package com.learning;
  */
 public class LeetCode38 {
     public static void main(String[] args) {
-        System.out.println(numberOff(2));
+        System.out.println(numberOff(6));
     }
 
 
@@ -41,27 +41,31 @@ public class LeetCode38 {
         if (num == 0 || num == 1) {
             return s;
         }
-        int count = 1;
+
         StringBuffer stringBuffer = new StringBuffer(s);
-        for (int i = 0; i < num; i++) {
-            char st = stringBuffer.charAt(0);
+        for (int i = 1; i < num; i++) {
+            int count = 1;
+            StringBuffer current = stringBuffer;
+            stringBuffer = new StringBuffer();
+            char st = current.charAt(0);
             System.out.println(st);
-            int length = stringBuffer.length();
-            for (int j = 0; j < length; j++) {
-                if (stringBuffer.charAt(j) == st) {
+            int length = current.length();
+            for (int j = 1; j < length; j++) {
+                if (current.charAt(j) == st) {
                     count++;
                 } else {
                     System.out.println("count  " + count + "st  " + st);
                     stringBuffer.append(count).append(st);
                     count = 1;
-                    st = stringBuffer.charAt(j);
+                    st = current.charAt(j);
                 }
 
             }
-            stringBuffer = new StringBuffer();
+
 
             System.out.println("count  " + count + "st  " + st);
             stringBuffer.append(count).append(st);
+            System.out.println("count  " + count + "st  " + st + "  stringBuffer  " + stringBuffer.toString());
         }
         return stringBuffer.toString();
     }
