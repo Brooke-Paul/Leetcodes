@@ -32,10 +32,18 @@ package com.learning;
  */
 public class LeetCode38 {
     public static void main(String[] args) {
-        System.out.println(numberOff(6));
+        System.out.println(numberOff(7));
     }
 
 
+    /**
+     * 解决思路：
+     * 第一个循环用于获取上一次返回的字串
+     * 第二个循环用于处理上次的字串判断重复count+1，不重复重新计算下标与count
+     *
+     * @param num
+     * @return
+     */
     public static String numberOff(int num) {
         String s = "1";
         if (num == 0 || num == 1) {
