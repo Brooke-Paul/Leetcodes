@@ -1,5 +1,8 @@
 package com.learning;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author xuetao
  * @Description: 给定一个未排序的整数数组，找出其中没有出现的最小的正整数。
@@ -27,11 +30,41 @@ package com.learning;
  */
 public class LeetCode41 {
     /**
-     *
-     * 明日解决
+     * 解决思路：
+     * 将大于0的数存入map
+     * 获取数组中的最大值与数组长度比较
+     * 如果map中不存在该数值，返回索引
      * @param args
      */
     public static void main(String[] args) {
-
+        int[] array = {0, 5, 4, 1, 0};
+        System.out.println(findMissingNum(array));
     }
+
+    public static int findMissingNum(int[] array) {
+        Map<Integer, Boolean> map = new HashMap<>();
+        int max = 0;
+        int len = array.length;
+        for (int i = 0; i < len; i++) {
+            if (array[i] <= 0) {
+                continue;
+            } else {
+                if (array[i] > max) {
+                    max = array[i];
+                }
+                map.put(array[i], true);
+            }
+        }
+        int maxL = Math.max(max, len);
+        System.out.println(maxL);
+        map.forEach((k, v) -> System.out.println(k + "::" + v));
+        for (int j = 1; j <= maxL; j++) {
+
+            if (map.get(j) == null) {
+                return j;
+            }
+        }
+        return 1;
+    }
+
 }
