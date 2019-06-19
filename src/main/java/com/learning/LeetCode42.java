@@ -18,13 +18,53 @@ package com.learning;
 public class LeetCode42 {
 
     /**
-     * 明日解决
-     * 思考： 横坐标差与纵坐标差相乘
-     *
+     * 思考：获取最大值
+     * 从左递增到最大值获取雨滴
+     * 从右递减到最大值获取雨滴
      *
      * @param args
      */
     public static void main(String[] args) {
+        int array[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        System.out.println(trap(array));
+    }
+
+    public static int trap(int[] array) {
+        if (array == null || array.length < 3) {
+            return 0;
+        }
+
+        int sum = 0;
+        int length = array.length;
+        int index = 0;
+        int max = 0;
+
+        for (int i = 0; i < length; i++) {
+            if (max < array[i]) {
+                max = array[i];
+                index = i;
+            }
+        }
+
+        int left = 0;
+        for (int l = 1; l < index; l++) {
+            if (left < array[l]) {
+                left = array[l];
+            } else {
+                sum += left - array[l];
+            }
+        }
+
+
+        int right = 0;
+        for (int r = length - 2; r > index; r--) {
+            if (right < array[r]) {
+                right = array[r];
+            } else {
+                sum += right - array[r];
+            }
+        }
+        return sum;
 
     }
 }
