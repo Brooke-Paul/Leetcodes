@@ -57,8 +57,9 @@ package com.learning;
 public class LeetCode44 {
     public static void main(String[] args) {
         String s = "acdcb";
-        String p = "a*";
+        String p = "a*v";
         System.out.println(isMatch(s, p));
+        System.out.println(isMatchTwo(s, p));
     }
 
     public static boolean isMatch(String s, String p) {
@@ -84,5 +85,33 @@ public class LeetCode44 {
             }
         }
         return match[0][0];
+    }
+
+    public static boolean isMatchTwo(String s, String p) {
+        int i = 0;
+        int j = 0;
+        int sLen =  s.length();
+        int pLen =  p.length();
+        int star = -1;
+        int mark = -1;
+        while (i < sLen) {
+            if (j <pLen
+                    && (p.charAt(j) == '?' || p.charAt(j) == s.charAt(i))) {
+                ++i;
+                ++j;
+            } else if (j < pLen && p.charAt(j) == '*') {
+                star = j++;
+                mark = i;
+            } else if (star != -1) {
+                j = star + 1;
+                i = ++mark;
+            } else {
+                return false;
+            }
+        }
+        while (j < pLen && p.charAt(j) == '*') {
+            ++j;
+        }
+        return j == pLen;
     }
 }
