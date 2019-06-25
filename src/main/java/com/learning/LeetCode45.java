@@ -1,5 +1,6 @@
 package com.learning;
 
+
 /**
  * @Author xuetao
  * @Description: 给定一个非负整数数组，你最初位于数组的第一个位置。
@@ -23,12 +24,29 @@ package com.learning;
  */
 public class LeetCode45 {
     /**
-     * 今天晚上解决
-     * 思路：最少跳跃次数，
+     * 思路：最少跳跃次数
      *
      * @param args
      */
     public static void main(String[] args) {
-
+        int[] array = {2, 5, 3, 3, 2, 7, 1};
+        System.out.println(jumpNumber(array));
     }
+
+
+    public static int jumpNumber(int[] array) {
+        int step = 0;
+        int lastJump = 0;
+        int currentJump = 0;
+        int length = array.length;
+        for (int i = 0; i < length - 1; i++) {
+            currentJump = Math.max(currentJump, i + array[i]);
+            if (i == lastJump) {
+                lastJump = currentJump;
+                step++;
+            }
+        }
+        return step;
+    }
+
 }
