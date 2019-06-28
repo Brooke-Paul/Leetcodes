@@ -26,7 +26,7 @@ public class LeetCode47 {
      * @param args
      */
     public static void main(String[] args) {
-        int[] array = {1, 1, 2};
+        int[] array = {1, 1, 1};
         Arrays.sort(array);
         fullPermutation(array);
     }
@@ -38,9 +38,11 @@ public class LeetCode47 {
         int length = array.length;
         List<List<Integer>> lists = new ArrayList<>();
         for (int i = 0; i < length; i++) {
-            Map map = new HashMap();
-            map.put(0, i);
-            findAllNext(lists, map, array, length);
+            List<Integer> listIndex = new ArrayList();
+            List<Integer> list = new ArrayList();
+            listIndex.add(i);
+            list.add(array[i]);
+            findAllNext(lists, listIndex, list, array, length);
         }
 
         lists.forEach(i -> {
@@ -50,26 +52,24 @@ public class LeetCode47 {
 
     }
 
-    public static void findAllNext(List<List<Integer>> lists, Map map, int[] array, int length) {
-        if (map.size() == length) {
-            List list = new ArrayList();
-            Set<Map.Entry> set = map.entrySet();
-            Iterator<Map.Entry> iterator = set.iterator();
-            while (iterator.hasNext()) {
-                Map.Entry entry = iterator.next();
-                list.add(array[(Integer) entry.getValue()]);
-            }
-            if (!lists.contains(list)) {
-                lists.add(list);
-            }
+    public static void findAllNext(List<List<Integer>> lists, List<Integer> listIndex, List<Integer> list, int[] array, int length) {
+        if (listIndex.size() == length) {
+            lists.add(new ArrayList<>(list));
         } else {
             for (int j = 0; j < length; j++) {
-                if (!map.containsValue(j)) {
-                    map.put(map.size(), j);
-                    findAllNext(lists, map, array, length);
-                    map.remove(map.size() - 1);
+                //如果当前索引已存在，跳过当前循环
+                if (listIndex.contains(j)) {
+                    continue;
                 }
-
+                //如果当前索引大于0并且相邻位置数据相同并且上一个数已处在
+                if (j > 0 && array[j] == array[j - 1] && listIndex.contains(j - 1)) {
+                    continue;
+                }
+                listIndex.add(j);
+                list.add(array[j]);
+                findAllNext(lists, listIndex, list, array, length);
+                listIndex.remove(listIndex.size() - 1);
+                list.remove(list.size() - 1);
             }
         }
 
