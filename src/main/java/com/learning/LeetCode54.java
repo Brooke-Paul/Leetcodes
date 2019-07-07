@@ -32,7 +32,8 @@ import java.util.List;
 public class LeetCode54 {
     public static void main(String[] args) {
         int[][] array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        spiralOrder(array);
+        List<Integer> integers = spiralOrder(array);
+        integers.forEach(i -> System.out.print(i));
     }
 
     public static List<Integer> spiralOrder(int[][] matrix) {
@@ -50,11 +51,35 @@ public class LeetCode54 {
         int colstart = 0;
         int colend = matrix[0].length - 1;
         while (rowstart <= rowend && colstart <= colend) {
+
+            // right
             for (int j = colstart; j <= colend; j++) {
                 result.add(matrix[rowstart][j]);
             }
+            rowstart++;
+
+            // down
+            for (int i = rowstart; i <= rowend; i++) {
+                result.add(matrix[i][colend]);
+            }
+            colend--;
+
+            // left
+            if (rowstart <= rowend) {
+                for (int x = colend; x >= colstart; x--) {
+                    result.add(matrix[rowend][x]);
+                }
+            }
+            rowend--;
+
+            // up
+            if (colstart <= colend) {
+                for (int x = rowend; x >= rowstart; x--) {
+                    result.add(matrix[x][colstart]);
+                }
+            }
+            colstart++;
         }
-        rowstart++;
         return result;
     }
 
