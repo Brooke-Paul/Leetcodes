@@ -24,10 +24,19 @@ package com.learning;
  */
 public class LeetCode55 {
     public static void main(String[] args) {
-        int[] array = {1, 4, 0, 0, 4};
+        int[] array = {1, 4, 0, 1, 4};
         System.out.println(jump(array, 0, array.length));
+        System.out.println(jump(array));
     }
 
+    /**
+     * 嵌套求下标和 是否等于length
+     *
+     * @param array
+     * @param index
+     * @param length
+     * @return
+     */
     public static boolean jump(int[] array, int index, int length) {
         boolean result = false;
         if (index == length - 1) {
@@ -46,5 +55,24 @@ public class LeetCode55 {
         }
 
         return result;
+    }
+
+
+    /**
+     * 简化 方法一
+     * 判断当前索引之和
+     *
+     * @param array
+     * @return
+     */
+    public static boolean jump(int[] array) {
+        int length = array.length;
+        int target = array[0];
+        for (int i = 0; i < length; i++) {
+            if (i <= target && array[i] + i > target) {
+                target = array[i] + i;
+            }
+        }
+        return target >= length - 1;
     }
 }
