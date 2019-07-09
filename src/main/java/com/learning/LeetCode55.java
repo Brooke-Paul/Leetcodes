@@ -24,7 +24,7 @@ package com.learning;
  */
 public class LeetCode55 {
     public static void main(String[] args) {
-        int[] array = {1, 4, 0, 1, 4};
+        int[] array = {4, 1, 1};
         System.out.println(jump(array, 0, array.length));
         System.out.println(jump(array));
     }
@@ -59,20 +59,36 @@ public class LeetCode55 {
 
 
     /**
-     * 简化 方法一
+     * 简化 方法  当前索引下标大于length 直接跳过
      * 判断当前索引之和
      *
      * @param array
      * @return
      */
     public static boolean jump(int[] array) {
-        int length = array.length;
-        int target = array[0];
-        for (int i = 0; i < length; i++) {
-            if (i <= target && array[i] + i > target) {
-                target = array[i] + i;
+        int lastPos = array.length - 1;
+        for (int i = array.length - 1; i >= 0; i--) {
+            if (i + array[i] > lastPos) {
+                continue;
+            }
+            if (i + array[i] >= lastPos) {
+                lastPos = i;
             }
         }
-        return target >= length - 1;
+        return lastPos == 0;
+
+//        int lastPos = 0;
+//        for (int i = 0; i <= array.length - 1; i++) {
+//
+//            if (array[i] + i > array.length - 1) {
+//                continue;
+//            }
+//            if (lastPos < array.length) {
+//                lastPos = array[i] + i;
+//            }
+//        }
+//        return lastPos == array.length - 1;
+
+
     }
 }
