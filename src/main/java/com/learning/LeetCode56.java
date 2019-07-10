@@ -28,13 +28,11 @@ public class LeetCode56 {
     public static void main(String[] args) {
 
         List<List<Integer>> list = new ArrayList();
-        list.add(Arrays.asList(3, 1));
         list.add(Arrays.asList(2, 6));
+        list.add(Arrays.asList(1, 3));
         list.add(Arrays.asList(4, 10));
         list.add(Arrays.asList(15, 18));
-        list.forEach(i -> {
-            Collections.sort(i, (o1, o2) -> o1 - o2);
-        });
+        Collections.sort(list, (o1, o2) -> o1.get(0) - o2.get(0));
 
         list.forEach(i -> {
             i.forEach(o -> System.out.println(o));
