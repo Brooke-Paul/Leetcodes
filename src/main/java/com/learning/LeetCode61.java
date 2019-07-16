@@ -37,49 +37,39 @@ public class LeetCode61 {
         node.next.next.next.next = new Node(Objects.hashCode(5), 5, 5, null);
         Node temp = node;
 
-        int length = 0;
-        while (temp != null) {
+        int length = 1;
+        while (temp.next != null) {
             temp = temp.next;
             length++;
         }
-
-        System.out.println("链表长度" + length);
-
         int k = 6;
-
-        int m = Math.abs(length - k);
-        int n = m;
-        Node first = null;
-        Node tempNode = node;
-        if (m == 0) {
-            first = node;
-        } else {
-            while (m >= 1) {
-                m--;
-                tempNode = tempNode.next;
-            }
-            first = tempNode;
-
-            Node tempFirst = first;
-            while (tempFirst.next != null) {
-                tempFirst = tempFirst.next;
-            }
-            while (node != null && n > 0) {
-                tempFirst.next = node;
-                tempFirst = tempFirst.next;
-                node = node.next;
-                n--;
-            }
-            tempFirst.next = null;
-        }
-
-        while (first != null) {
-            System.out.println(first.value);
-            first = first.next;
-        }
-
+        System.out.println("链表长度" + length);
+        rotateLink(node, temp, length, k);
 
     }
 
+    /**
+     * 方法一 先形成闭环然后再隔断
+     *
+     * @param node
+     * @param length
+     */
+    private static void rotateLink(Node node, Node temp, int length, int k) {
+        if (node == null) {
+            return;
+        }
+        Node first = node;
+        temp.next = node; //形成闭环
+//        for (int i = length - k % length; i > 1; i--) {
+        for (int i = 1; i < length - k % length; i++) {
+            first = first.next;
+        }
+        temp = first.next;
+        first.next = null;
 
+        while (temp != null) {
+            System.out.println("rotateLink  " + temp.value);
+            temp = temp.next;
+        }
+    }
 }
