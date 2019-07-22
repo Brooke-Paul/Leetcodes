@@ -23,41 +23,39 @@ import java.util.Arrays;
 public class LeetCode67 {
 
     public static void main(String[] args) {
-        String a = "11011";
-        String b = " 1010";
+        String a = "1111";
+        String b = "1";
 
         int aLen = a.length();
         int bLen = b.length();
         int max = aLen >= bLen ? aLen : bLen;
         int min = aLen <= bLen ? aLen : bLen;
-        int[] array = new int[max];
         StringBuffer stringBuffer = new StringBuffer();
         boolean result = false;
-        for (int i = min - 1; i >= 0; i--) {
-            if (a.charAt(i) == b.charAt(i) && a.charAt(i) == '1') {
-                stringBuffer.append(0);
+        while (max > 0 || min > 0) {
+            int x = 0;
+            int y = 0;
+            if (max > 0) {
+                x = a.charAt(--max) - '0';
+            }
+            if (min > 0) {
+                y = b.charAt(--min) - '0';
+            }
+            int m = x + y + (result == true ? 1 : 0);
+            if (m >= 2) {
+                m = m % 2;
                 result = true;
             } else {
-                int x = a.charAt(i) - '0' + b.charAt(i) - '0' + (result == true ? 1 : 0);
-                result = x == 2;
-                System.out.println(x);
-                stringBuffer.append(result ? 0 : x);
+                m = m % 2;
+                result = false;
             }
+            stringBuffer.append(m);
         }
-
-        for (int j = max - min - 1; j >= 0; j--) {
-            String x = aLen > bLen ? a : b;
-
-            int n = x.charAt(j) - '0' + (result == true ? 1 : 0);
-            result = n == 2;
-            System.out.println(n);
-            stringBuffer.append(result ? 0 : n);
-        }
-        if (result == true) {
-
+        if (result) {
             stringBuffer.append(1);
-
         }
+
+        System.out.println(stringBuffer.toString());
         System.out.println(stringBuffer.reverse().toString());
     }
 }
