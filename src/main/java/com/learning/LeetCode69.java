@@ -29,12 +29,26 @@ package com.learning;
  */
 public class LeetCode69 {
     /**
-     * 思路：递归求解
-     * 明日解决
+     * 思路：每一次只能爬一步或者两步, 即d(i)=d(i-1)+d(i-2)
      *
      * @param args
      */
     public static void main(String[] args) {
-
+        int n = 4;
+        System.out.println(climb(n));
     }
+
+    private static int climb(int n) {
+        int[] result = new int[n];
+        result[0] = 1;
+        if (n == 1) {
+            return 1;
+        }
+        result[1] = 2;
+        for (int i = 2; i < n; i++) {
+            result[i] = result[i - 1] + result[i - 2];
+        }
+        return result[n - 1];
+    }
+
 }
