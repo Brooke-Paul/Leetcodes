@@ -1,5 +1,7 @@
 package com.learning;
 
+import java.util.Stack;
+
 /**
  * @Author xuetao
  * @Description: 给定一个文档 (Unix-style) 的完全路径，请进行路径简化。
@@ -25,11 +27,32 @@ public class LeetCode70 {
      * @param args
      */
     public static void main(String[] args) {
-
+        String path = "/a/./b/../1/c/";
+        System.out.println(simplifyPath(path));
     }
 
     private static String simplifyPath(String path) {
-
-        return "";
+        String[] array = path.split("/");
+        int length = array.length;
+        Stack s = new Stack();
+        StringBuffer res = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            if (array[i].equals("") || array[i].equals(".") || (array[i].equals("..") && s.isEmpty())) {
+                continue;
+            } else if (array[i].equals("..") && !s.isEmpty()) {
+                s.pop();
+            } else {
+                s.push(array[i]);
+            }
+        }
+        if (s.isEmpty()) {
+            return "/";
+        } else {
+            Object[] a = s.toArray();
+            for (int i = 0; i < a.length; i++) {
+                res.append("/" + a[i].toString());
+            }
+            return res.toString();
+        }
     }
 }
