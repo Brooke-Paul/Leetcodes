@@ -25,14 +25,16 @@ public class LeetCode75 {
     public static void main(String[] args) {
         String source = "ADOBECODEBANC";
         int sLen = source.length();
-        String target = "ABC";
+        String target = "ADC";
         int tLen = target.length();
         Map<Character, Character> map = new HashMap<Character, Character>(tLen);
         if (!containsString(map, tLen, source, target)) {
             System.out.println("S 中不存这样的子串");
             return;
         }
-        compare(map, sLen, source, 0, 0, 0, 0);
+        for (int i = 0; i < sLen; i++) {
+            compare(new HashMap<>(map), sLen, tLen, source, i, i, Integer.MAX_VALUE);
+        }
 
     }
 
@@ -58,23 +60,31 @@ public class LeetCode75 {
         return result;
     }
 
-    private static void compare(Map<Character, Character> map, int sLen, String source, int start, int startIndex, int endIndex, int min) {
+    private static boolean compare(Map<Character, Character> map, int sLen, int tLen, String source, int start, int startIndex, int min) {
         for (int i = start; i < sLen; i++) {
             Character character = source.charAt(i);
             if (map.containsKey(character)) {
                 map.remove(character);
             }
             if (map.isEmpty()) {
-                min = Math.min(min, endIndex - startIndex);
-                if (min == 0) {
+                int length = start - startIndex;
+                if (length == Integer.MAX_VALUE) {
                     System.out.println("S 中不存这样的子串");
                 } else {
-                    System.out.println("startIndex " + startIndex + " endIndex " + endIndex);
+                    if (length >= tLen - 1 && length < min) {
+                        min = length;
+                        System.out.println("startIndex " + startIndex + " endIndex " + start);
+                        System.out.println("最小值为 " + (length + 1));
+                    } else {
+                        return true;
+                    }
                 }
             }
-            compare(map, sLen, source, i + 1, startIndex, endIndex, min);
+            boolean result = compare(map, sLen, tLen, source, i + 1, startIndex, min);
+            if (result) {
+                break;
+            }
         }
-
+        return true;
     }
-
 }
