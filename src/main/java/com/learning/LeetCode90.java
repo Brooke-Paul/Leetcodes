@@ -41,19 +41,20 @@ public class LeetCode90 {
     private static void reverseLinked(Node node, int m, int n) {
         Node first = new Node(0, 0, 0, null);
         first.next = node;
-        Node pre = first;
-        for (int i = 0; i < m - 1; i++) {
+        Node pre = first.next;
+        for (int i = 1; i < m - 1; i++) {
             pre = pre.next;
         }
         Node start = pre.next;
-        Node then = start.next;
-
+        Node next = start.next;
         for (int i = 0; i < n - m; i++) {
-            start.next = then.next;
-            then.next = pre.next;
-            pre.next = then;
-            then = start.next;
+            start.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+            next = start.next;
         }
+
+
         first = first.next;
         while (first != null) {
             System.out.println(first.value);
