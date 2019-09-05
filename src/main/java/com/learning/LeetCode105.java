@@ -22,12 +22,9 @@ public class LeetCode105 {
         Node node = new Node(1, 1, 1, null);
         node.next = new Node(3, 3, 3, null);
         node.next.next = new Node(2, 2, 2, null);
-        node.next.next.next = new Node(1, 1, 1, null);
+        node.next.next.next = node;
         Node slow = firstCycle(node);
-        while (slow != null) {
-            System.out.println(slow.value);
-            slow = slow.next;
-        }
+        System.out.println(slow.value);
     }
 
 
