@@ -35,6 +35,12 @@ public class LeetCode107 {
     }
 
 
+    /**
+     * 构造快慢链表，前后拆分后排序，最后合并
+     *
+     * @param node
+     * @return
+     */
     private static Node mergeLinked(Node node) {
         if (node == null || node.next == null) {
             return node;
