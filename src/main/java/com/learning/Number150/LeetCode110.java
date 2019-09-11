@@ -25,7 +25,7 @@ package com.learning.Number150;
 public class LeetCode110 {
 
     public static void main(String[] args) {
-        int[] array = {4,5,6,7,0,1,2};
+        int[] array = {4, 5, 6, 7, 8, 1, 2};
         System.out.println(findMin(array));
     }
 
@@ -38,19 +38,17 @@ public class LeetCode110 {
         if (array[left] < array[right]) {
             return array[left];
         }
-        int min = array[0];
-        while (left + 1 < right) {
-            int mid = (left + right) / 2;
-            min = Math.min(min, array[mid]);
-
-            if (array[left] < array[mid]) {
-                min = Math.min(array[left], min);
+        int mid = 0;
+        while (left < right) {
+            mid = left + (right - left) / 2;
+            if (array[mid] <= array[right]) {
+                right = mid;
+            } else {
                 left = mid + 1;
-            } else if (array[left] > array[mid]) {
-                right = mid - 1;
             }
         }
-        min = Math.min(min, Math.min(array[left], array[right]));
-        return min;
+
+
+        return array[left];
     }
 }
