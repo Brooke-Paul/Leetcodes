@@ -41,10 +41,9 @@ public class LeetCode115 {
         int len = array.length;
         int max = 0;
 
-        for (int i = 1; i < len; i = i + 2) {
-            max = Math.max(array[i], array[i - 1]);
+        for (int i = 1; i < len; i++) {
+            max = Math.max(array[i] - array[i - 1], max);
         }
-
-//        if (len)
+        return max;
     }
 }
