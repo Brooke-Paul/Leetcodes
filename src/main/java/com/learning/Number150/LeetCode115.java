@@ -29,12 +29,13 @@ import java.util.Arrays;
  */
 public class LeetCode115 {
     public static void main(String[] args) {
-        int[] array = {3, 6, 9, 1};
+        int[] array = {3, 7, 9, 1, 6, 9, 9};
         Arrays.sort(array);
         System.out.println(findMaxValue(array));
     }
 
     private static int findMaxValue(int[] array) {
+        long startTime = System.currentTimeMillis();
         if (array == null || array.length < 2) {
             return 0;
         }
@@ -42,8 +43,16 @@ public class LeetCode115 {
         int max = 0;
 
         for (int i = 1; i < len; i++) {
+            if (array[i] == array[i - 1]) {
+                continue;
+            }
+
             max = Math.max(array[i] - array[i - 1], max);
         }
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("cost(" + (endTime - startTime) + ")ms");
         return max;
     }
 }
