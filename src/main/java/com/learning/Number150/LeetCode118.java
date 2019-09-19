@@ -28,37 +28,30 @@ public class LeetCode118 {
         lists.forEach(i -> System.out.println(i));
     }
 
+    /**
+     * 方法改进  判断两数之和与目标值比较
+     * @param array
+     * @param target
+     * @return
+     */
     private static List<List<Integer>> findTargetIndex(int[] array, int target) {
         List<List<Integer>> lists = new ArrayList<>();
 
         int start = 0;
         int end = array.length - 1;
-        int min = array[0];
-
-        if (min >= target) {
-            return lists;
-        }
-        int mid = 0;
-        while (start + 1 < end) {
-
-            mid = (start + end) / 2;
-
-
-            if (array[mid] > target) {
+        while (start < end) {
+            int num = array[start] + array[end];
+            if (num > target) {
                 end--;
-            } else if (array[mid] < target) {
+            } else if (num < target) {
                 start++;
-            }
-        }
-        for (int i = 0; i < mid; i++) {
-
-            for (int j = i + 1; j < mid; j++) {
-                if (array[i] + array[j] == target) {
-                    List<Integer> list = new ArrayList<>(2);
-                    list.add(i + 1);
-                    list.add(j + 1);
-                    lists.add(list);
-                }
+            } else {
+                List<Integer> list = new ArrayList<>(2);
+                list.add(start + 1);
+                list.add(end + 1);
+                lists.add(list);
+                start++;
+                end--;
             }
         }
         return lists;
