@@ -40,6 +40,7 @@ public class LeetCode119 {
             stringBuilder.append((char) (temp + 65));
             num = (num - 1) / 26;
         }
+
         return stringBuilder.reverse().toString();
     }
 
