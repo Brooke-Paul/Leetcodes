@@ -26,5 +26,41 @@ package com.learning.Number150;
 public class LeetCode125 {
     public static void main(String[] args) {
 
+        int[] array = {3, 2, 6, 5, 0, 3};
+        int k = 2;
+        System.out.println(maxStocks(array, k));
+    }
+
+
+    private static int maxStocks(int[] array, int k) {
+        if (array == null || array.length < 2) {
+            return 0;
+        }
+        int length = array.length;
+
+        if (k >= length / 2) {
+            int price = 0;
+            for (int i = 1; i < length; i++) {
+                if (array[i] > array[i - 1]) {
+                    price += array[i] - array[i - 1];
+                }
+            }
+            return price;
+        }
+
+
+        int[][] buy = new int[k + 1][length];
+        for (int j = 1; j <= k; j++) {
+            int temp = -array[0];
+            for (int m = 1; m < length; m++) {
+                buy[j][m] = Math.max(buy[j][m - 1], array[m] + temp);
+                System.out.println("j=" + j + ",m=" + m + ",buy=" + buy[j][m]);
+
+                temp = Math.max(temp, buy[j - 1][m - 1] - array[m]);
+                System.out.println("temp=" + temp);
+            }
+        }
+        return buy[k][length - 1];
+
     }
 }
