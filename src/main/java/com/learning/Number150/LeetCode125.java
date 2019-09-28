@@ -26,12 +26,19 @@ package com.learning.Number150;
 public class LeetCode125 {
     public static void main(String[] args) {
 
-        int[] array = {3, 2, 6, 5, 0, 3};
+        int[] array = {3, 2, 7, 5, 9, 0, 3};
         int k = 2;
         System.out.println(maxStocks(array, k));
     }
 
 
+    /**
+     * k 为 循环的次数， 利用二维数组去累加操作，获取最大值
+     *
+     * @param array
+     * @param k
+     * @return
+     */
     private static int maxStocks(int[] array, int k) {
         if (array == null || array.length < 2) {
             return 0;
@@ -47,7 +54,6 @@ public class LeetCode125 {
             }
             return price;
         }
-
 
         int[][] buy = new int[k + 1][length];
         for (int j = 1; j <= k; j++) {
