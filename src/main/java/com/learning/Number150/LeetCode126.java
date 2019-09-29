@@ -31,9 +31,10 @@ import java.util.Arrays;
  */
 public class LeetCode126 {
     public static void main(String[] args) {
-        int[] array = {-1, -100, 3, 99};
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
         int k = 3;
-        moveArray(array, k);
+//        moveArray(array, k);
+        moveArrayII(array, k);
         for (int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
         }
@@ -56,5 +57,35 @@ public class LeetCode126 {
             array[i] = tmp[i];
         }
     }
+
+
+    /**
+     * 方法一： 数组复制
+     *
+     * @param array
+     * @param k
+     */
+    private static void moveArrayII(int[] array, int k) {
+        int length = array.length;
+        int[] tmp1 = new int[k];
+        int[] tmp2 = new int[length - k];
+
+        // 组装 0 ~ k
+        for (int i = 0; i < k; i++) {
+            tmp1[i] = array[length - k + i];
+        }
+
+        // 组装 0 ~ length - k
+        for (int i = 0; i < length - k; i++) {
+            tmp2[i] = array[i];
+        }
+
+        //数组复制
+        System.arraycopy(tmp1, 0, array, 0, k);
+        //数组组合
+        System.arraycopy(tmp2, 0, array, k, length - k);
+
+    }
+
 
 }
