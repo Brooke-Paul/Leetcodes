@@ -1,5 +1,7 @@
 package com.learning.Number150;
 
+import java.util.Arrays;
+
 /**
  * @Author xuetao
  * @Description: 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
@@ -29,14 +31,30 @@ package com.learning.Number150;
  */
 public class LeetCode126 {
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        int[] array = {-1, -100, 3, 99};
         int k = 3;
         moveArray(array, k);
+        for (int i = 0; i < array.length; i++) {
+            System.out.println(array[i]);
+        }
     }
 
+    /**
+     * 方法一： 直接转换
+     *
+     * @param array
+     * @param k
+     */
     private static void moveArray(int[] array, int k) {
+        int length = array.length;
+        int[] tmp = new int[length];
+        for (int i = 0; i < length; i++) {
+            tmp[(i + k) % length] = array[i];
+        }
 
-
+        for (int i = 0; i < length; i++) {
+            array[i] = tmp[i];
+        }
     }
 
 }
