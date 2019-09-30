@@ -26,12 +26,9 @@ public class LeetCode127 {
     private static void transferBinaryI(int num) {
         long res = 0;
         for (int i = 0; i < 32; i++) {
+            res <<= 1;
             res |= num & 1;
-
             num >>>= 1;
-            if (i < 31) {
-                res <<= 1;
-            }
         }
         System.out.println(res);
     }
