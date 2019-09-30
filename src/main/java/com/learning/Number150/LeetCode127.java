@@ -19,9 +19,14 @@ package com.learning.Number150;
 public class LeetCode127 {
     public static void main(String[] args) {
         int num = 43261596;
-        int res = 0;
+        transferBinaryI(num);
+    }
+
+
+    private static void transferBinaryI(int num) {
+        long res = 0;
         for (int i = 0; i < 32; i++) {
-            res += num & 1;
+            res |= num & 1;
 
             num >>>= 1;
             if (i < 31) {
