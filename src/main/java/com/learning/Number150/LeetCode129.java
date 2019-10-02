@@ -24,24 +24,25 @@ package com.learning.Number150;
  */
 public class LeetCode129 {
     public static void main(String[] args) {
-        int[] array = {2,99,9,3,1};
+        int[] array = {2, 99, 9, 1, 90, 1, 1, 50};
         System.out.println(findMax(array));
     }
 
     private static int findMax(int[] array) {
-
-        int length = array.length;
-
-        int max1 = 0;
-        int max2 = 0;
-        for (int i = 0; i < length; i++) {
-            if (i % 2 == 0) {
-                max1 += array[i];
-            } else {
-                max2 += array[i];
-            }
+        if (array == null || array.length == 0) {
+            return 0;
         }
-        return Math.max(max1, max2);
+        if (array.length == 1) {
+            return array[0];
+        }
 
+        int dp[] = new int[array.length];
+        dp[0] = array[0];
+        dp[1] = Math.max(array[0], array[1]);
+
+        for (int i = 2; i < array.length; i++) {
+            dp[i] = Math.max(dp[i - 2] + array[i], dp[i - 1]);
+        }
+        return dp[array.length - 1];
     }
 }
