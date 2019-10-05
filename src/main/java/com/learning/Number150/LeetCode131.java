@@ -28,11 +28,17 @@ package com.learning.Number150;
  */
 public class LeetCode131 {
     public static void main(String[] args) {
-        char[][] array = {{11000}, {11000}, {00100}, {00011}};
+        int[][] array = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 1}};
         System.out.println(numIslands(array));
     }
 
-    public static int numIslands(char[][] grid) {
+    /**
+     * 规则： 如果有1个为1，则把相邻的全部置为0，计数加1
+     *
+     * @param grid
+     * @return
+     */
+    private static int numIslands(int[][] grid) {
         if (grid == null || grid.length == 0) {
             return 0;
         }
@@ -41,7 +47,7 @@ public class LeetCode131 {
         int n = grid[0].length;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (grid[i][j] == '1') {
+                if (grid[i][j] == 1) {
                     count++;
                     dfs(grid, i, j, m, n);
                 }
@@ -50,11 +56,11 @@ public class LeetCode131 {
         return count;
     }
 
-    private static void dfs(char[][] grid, int i, int j, int m, int n) {
-        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
+    private static void dfs(int[][] grid, int i, int j, int m, int n) {
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0) {
             return;
         }
-        grid[i][j] = '0';
+        grid[i][j] = 0;
         dfs(grid, i + 1, j, m, n);
         dfs(grid, i, j + 1, m, n);
         dfs(grid, i - 1, j, m, n);
