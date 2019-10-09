@@ -21,10 +21,33 @@ public class LeetCode134 {
         node.next.next.next = new Node(2, 2, 2, null);
         node.next.next.next.next = new Node(3, 3, 3, null);
         int target = 3;
+        Node first = removeNodeI(node, target);
+        while (first != null) {
+            System.out.println(first.value);
+            first = first.next;
+        }
     }
 
-    private void removeNode(Node node, int target) {
-        Node first = node;
-        Node second = node;
+    /**
+     * 方法一
+     *
+     * @param node
+     * @param target
+     * @return
+     */
+    private static Node removeNodeI(Node node, int target) {
+        Node first = new Node(0, 0, 0, null);
+        first.next = node;
+        Node prev = first;
+        Node current = first.next;
+        while (current != null) {
+            if ((int) current.value == target) {
+                prev.next = current.next;
+            } else {
+                prev = prev.next;
+            }
+            current = current.next;
+        }
+        return first.next;
     }
 }
