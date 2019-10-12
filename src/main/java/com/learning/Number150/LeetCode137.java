@@ -27,27 +27,29 @@ public class LeetCode137 {
         node.next.next = new Node(3, 3, 3, null);
         node.next.next.next = new Node(4, 4, 4, null);
         node.next.next.next.next = new Node(5, 5, 5, null);
-        reverseLinked(node);
-        while (node != null) {
-            System.out.println(node.value);
-            node = node.next;
+        Node result = reverseLinked(node);
+        while (result != null) {
+            System.out.println(result.value);
+            result = result.next;
         }
     }
 
-    private static void reverseLinked(Node node) {
+    /**
+     * 反转链表 每次遍历交换当前两个数据位置
+     *
+     * @param node
+     * @return
+     */
+    private static Node reverseLinked(Node node) {
+        Node result = null;
 
-        Node first = node;
-        Node second = node;
-        List<Object> strings = new ArrayList<>();
-        while (first != null) {
-            strings.add(first.value);
-            first = first.next;
+        while (node != null) {
+            Node next = node.next;
+            node.next = result;
+            result = node;
+            node = next;
         }
-
-        for (int i = strings.size() - 1; i >= 0; i--) {
-            second.value = strings.get(i);
-            second = second.next;
-        }
+        return result;
 
     }
 }
