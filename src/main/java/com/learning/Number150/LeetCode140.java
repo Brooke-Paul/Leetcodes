@@ -23,11 +23,12 @@ import java.util.Map;
  */
 public class LeetCode140 {
     public static void main(String[] args) {
-        int[] array = {4, 3, 4, 2, 2, 1, 4};
+        int[] array = {4, 3, 4, 2, 2, 7, 4};
         int s = 7;
         Map<Integer, List<Integer>> map = new HashMap<>();
         List<Integer> result = findSubArray(map, array, s, Integer.MAX_VALUE);
         System.out.println(result);
+        System.out.println(findSubArrayLen(s, array));
 
     }
 
@@ -62,6 +63,25 @@ public class LeetCode140 {
             list.remove(list.size() - 1);
         }
         return min;
+    }
+
+    private static int findSubArrayLen(int s, int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int i = 0;
+        int j = 0;
+        int min = Integer.MAX_VALUE;
+        int sum = 0;
+        while (j < nums.length) {
+            sum += nums[j++];
+
+            while (sum >= s) {
+                min = Math.min(min, j - i);
+                sum -= nums[i++];
+            }
+        }
+        return min == Integer.MAX_VALUE ? 0 : min;
     }
 
 }
