@@ -33,11 +33,8 @@ public class LeetCode140 {
     }
 
     private static List<Integer> findSubArray(Map<Integer, List<Integer>> map, int[] array, int s, int min) {
-        for (int j = 0; j < array.length; j++) {
-            List<Integer> list = new ArrayList<>();
-            list.add(array[j]);
-            min = findNext(map, list, array, s, j + 1, min);
-        }
+
+        min = findNext(map, new ArrayList<>(), array, s, 0, min);
         return map.get(min);
     }
 
