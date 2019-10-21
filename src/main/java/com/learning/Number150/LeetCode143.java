@@ -30,32 +30,32 @@ public class LeetCode143 {
     public static void main(String[] args) {
 
         int k = 3;
-        int target = 7;
+        int target = 9;
         List<List<Integer>> lists = new ArrayList<>();
         findSumArray(lists, k, target);
-
+        lists.forEach(i -> System.out.println(i));
     }
 
-    private static int findSumArray(List<List<Integer>> lists, int k, int target) {
-        for (int i = 0; i < k; i++) {
-            List<Integer> list = new ArrayList<>();
-            list.add(new Random().nextInt(10));
-            findSumTarget(lists, list, i + 1, k, target);
-
-
-        }
+    private static void findSumArray(List<List<Integer>> lists, int k, int target) {
+        findSumTarget(lists, new ArrayList<>(), 0, k, 1, target);
     }
 
 
-    private static int findSumTarget(List<List<Integer>> lists, List<Integer> list, int i, int k, int target) {
-
-
-        if (list.stream().mapToInt(Integer::intValue).sum() == target) {
-            return 0;
+    private static void findSumTarget(List<List<Integer>> lists, List<Integer> list, int i, int k, int m, int target) {
+        if (list.size() == k && list.stream().mapToInt(Integer::intValue).sum() == target) {
+            lists.add(new ArrayList<>(list));
+            return;
+        }
+        for (int n = m; n <= 9; n++) {
+            for (int j = i; j < k; j++) {
+                if (list.contains(n)) {
+                    continue;
+                }
+                list.add(n);
+                findSumTarget(lists, list, j + 1, k, n + 1, target);
+                list.remove(list.size() - 1);
+            }
         }
 
-
-        for (int j = i; j < k; j++) {
-        }
     }
 }
