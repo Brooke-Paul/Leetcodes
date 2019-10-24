@@ -23,7 +23,7 @@ package com.learning.Number150;
  */
 public class LeetCode145 {
     public static void main(String[] args) {
-        int[] array = {1, 0, 1, 1};
+        int[] array = {2, 1};
         int target = 5;
         System.out.println(equalsAbsolute(array, target));
     }
@@ -42,7 +42,7 @@ public class LeetCode145 {
 
         int len = array.length;
         for (int i = 0; i < len; i++) {
-            for (int j = 1; j < len; j++) {
+            for (int j = i + 1; j < len; j++) {
                 if (array[i] == array[j] && j - i <= target) {
                     return true;
                 }
