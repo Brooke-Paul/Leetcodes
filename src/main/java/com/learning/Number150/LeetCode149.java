@@ -46,7 +46,8 @@ class MyStack {
     public void push(int x) {
         queue.offer(x);
         for (int i = 1; i < queue.size(); i++) {
-            queue.offer(queue.remove());
+            int item = queue.remove();
+            queue.offer(item);
         }
 
     }
