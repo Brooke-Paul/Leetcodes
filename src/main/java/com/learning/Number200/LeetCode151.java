@@ -1,5 +1,8 @@
 package com.learning.Number200;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author xuetao
  * @Description: 给定一个无重复元素的有序整数数组，返回数组区间范围的汇总。
@@ -19,7 +22,28 @@ package com.learning.Number200;
  * @Version 1.0
  */
 public class LeetCode151 {
-    public static void main(String[] args) {
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            String start = String.valueOf(nums[i]);
+            int tmpI = i;
+            while ((i + 1) < nums.length && (nums[i] + 1) == nums[i + 1]) {
+                i++;
+            }
+            if (tmpI == i) {
+                result.add(start);
+            } else {
+                result.add(start + "->" + nums[i]);
+            }
+        }
+        return result;
+    }
 
+    public static void main(String... args) {
+        int[] nums = new int[]{0, 1, 2, 4, 5, 7};
+        List<String> result = summaryRanges(nums);
+        for (String s : result) {
+            System.out.println(s);
+        }
     }
 }
