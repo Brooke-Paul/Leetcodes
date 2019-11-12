@@ -1,8 +1,5 @@
 package com.learning.Number200;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @Author xuetao
@@ -31,6 +28,7 @@ public class LeetCode160 {
         String s = "anagram";
         String t = "nagaram";
         System.out.println(ectopicWords(s, t));
+        System.out.println(ectopicWordsII(s, t));
     }
 
     private static boolean ectopicWords(String s, String t) {
@@ -50,6 +48,27 @@ public class LeetCode160 {
             }
         }
         return true;
+    }
+
+
+    private static boolean ectopicWordsII(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) {
+            return false;
+        }
+        int[] array = new int[26];
+
+        for (int i = 0; i < s.length(); i++) {
+            array[t.charAt(i) - 'a']--;
+            array[s.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+
     }
 
 }
