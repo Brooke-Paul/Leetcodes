@@ -21,18 +21,19 @@ import java.util.Arrays;
  */
 public class LeetCode167 {
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 4, 5};
+        int[] array = {3, 0, 6, 1, 5};
         System.out.println(maxH(array));
 
     }
 
     private static int maxH(int[] array) {
         Arrays.sort(array);
-        int left = 0;
-        int right = array.length;
-        int mid = (left + right) / 2;
-        return (right % 2 == 0 ? right + 1 : right) - mid;
-
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] >= array.length - i) {
+                return array.length - i;
+            }
+        }
+        return 0;
     }
 
 }
