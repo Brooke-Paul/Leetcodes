@@ -31,6 +31,8 @@ public class LeetCode170 {
         System.out.println(findMinNum(lists, new ArrayList<>(), n, target));
         System.out.println(lists);
 
+        System.out.println(findMinNumII(n));
+
     }
 
 
@@ -63,6 +65,24 @@ public class LeetCode170 {
             }
         }
         return lists.isEmpty() ? 0 : lists.get(0).size();
+    }
+
+    /**
+     * 方法二
+     *
+     * @param n
+     * @return
+     */
+    private static int findMinNumII(int n) {
+        int result = n;
+        int num = 2;
+        while (num * num <= n) {
+            int temp1 = n / (num * num);
+            int temp2 = n % (num * num);
+            result = Math.min(result, temp1 + findMinNum(temp2));
+            num++;
+        }
+        return result;
     }
 
 
