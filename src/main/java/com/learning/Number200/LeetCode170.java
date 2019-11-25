@@ -79,7 +79,7 @@ public class LeetCode170 {
         while (num * num <= n) {
             int temp1 = n / (num * num);
             int temp2 = n % (num * num);
-            result = Math.min(result, temp1 + findMinNum(temp2));
+            result = Math.min(result, temp1 + findMinNumII(temp2));
             num++;
         }
         return result;
