@@ -36,4 +36,5 @@ public class LeetCode178 {
     public static void main(String[] args) {
 
     }
+
 }
