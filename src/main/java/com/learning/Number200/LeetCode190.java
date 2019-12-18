@@ -37,6 +37,8 @@ public class LeetCode190 {
         node.next.next = new Node(3, 3, 3, null);
         node.next.next.next = new Node(4, 4, 4, null);
         node.next.next.next.next = new Node(5, 5, 5, null);
+        node.next.next.next.next.next = new Node(6, 6, 6, null);
+        node.next.next.next.next.next.next = new Node(7, 7, 7, null);
         Node result = sortNode(node);
         while (result != null) {
             System.out.println(result.value);
@@ -64,13 +66,10 @@ public class LeetCode190 {
             }
             temp = temp.next;
         }
-        second = second.next;
-        while (second != null) {
-            System.out.println(second.value);
-            second = second.next;
+        if (!state) {
+            secondTemp.next = null;
         }
-
-
+        firstTemp.next = second.next;
         return first.next;
     }
 }
