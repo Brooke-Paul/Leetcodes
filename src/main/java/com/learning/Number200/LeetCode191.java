@@ -1,5 +1,10 @@
 package com.learning.Number200;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Program Name: leetcodes
  * <p>
@@ -25,5 +30,56 @@ package com.learning.Number200;
 public class LeetCode191 {
     public static void main(String[] args) {
 
+        String[][] array = {{"JFK", "SFO"}, {"JFK", "ATL"}, {"SFO", "ATL"}, {"ATL", "JFK"}, {"ATL", "SFO"}};
+        System.out.println(findItinerary(array));
+    }
+
+    public static List<String> findItinerary(String[][] tickets) {
+        List<List<String>> allPossibilities = new ArrayList<>();
+
+        List<String[]> JFKStarts = new ArrayList<>();
+        for (String[] ticket : tickets) {
+            if (ticket[0].equals("JFK")) {
+                JFKStarts.add(ticket);
+            }
+        }
+
+        for (String[] ticket : JFKStarts) {
+            List<String> thisPossibility = new ArrayList<>();
+            thisPossibility.add(ticket[0]);
+            thisPossibility.add(ticket[1]);
+            dfs(ticket, thisPossibility, tickets, allPossibilities);
+        }
+
+        //sort lexicographically and return the smallest
+        Collections.sort(allPossibilities, new ListComparator<>());
+        return allPossibilities.get(0);
+    }
+
+    private static void dfs(String[] thisTicket, List<String> thisPossibility, String[][] tickets, List<List<String>> allPossibilities) {
+        if (thisPossibility.size() == tickets.length + 1) {
+            allPossibilities.add(new ArrayList<>(thisPossibility));
+            return;
+        }
+        for (String[] ticket : tickets) {
+            if (!ticket.equals(thisTicket) && thisPossibility.get(thisPossibility.size() - 1).equals(ticket[0])) {
+                thisPossibility.add(ticket[1]);
+                dfs(ticket, thisPossibility, tickets, allPossibilities);
+                thisPossibility.remove(thisPossibility.size() - 1);
+            }
+        }
+    }
+
+    private static class ListComparator<T extends Comparable<T>> implements Comparator<List<T>> {
+        @Override
+        public int compare(List<T> o1, List<T> o2) {
+            for (int i = 0; i < Math.min(o1.size(), o2.size()); i++) {
+                int c = o1.get(i).compareTo(o2.get(i));
+                if (c != 0) {
+                    return c;
+                }
+            }
+            return Integer.compare(o1.size(), o2.size());
+        }
     }
 }
