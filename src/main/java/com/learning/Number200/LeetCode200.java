@@ -1,5 +1,7 @@
 package com.learning.Number200;
 
+import java.util.*;
+
 /**
  * Program Name: leetcodes
  * <p>
@@ -21,6 +23,38 @@ package com.learning.Number200;
  */
 public class LeetCode200 {
     public static void main(String[] args) {
+        int[] array = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
+        int k = 2;
+        System.out.println(topK(array, k));
+    }
 
+    private static List topK(int[] array, int k) {
+        if (array == null || array.length == 0) {
+            return null;
+        }
+        int len = array.length;
+        Map<Integer, Integer> map = new HashMap<>(array.length);
+        for (int i = 0; i < len; i++) {
+            map.put(array[i], map.getOrDefault(array[i], 0) + 1);
+        }
+
+        List[] bucket = new ArrayList[len];
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            int value = e.getValue();
+
+            if (bucket[value] == null) {
+                bucket[value] = new ArrayList<Integer>();
+            }
+            bucket[value].add(e.getKey());
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = bucket.length - 1; i >= 0 && list.size() < k; i--) {
+            if (bucket[i] != null) {
+                for (int j = 0; j < bucket[i].size(); j++) {
+                    list.add((int) bucket[i].get(j));
+                }
+            }
+        }
+        return list;
     }
 }
