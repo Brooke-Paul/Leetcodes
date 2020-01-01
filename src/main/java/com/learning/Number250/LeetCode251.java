@@ -1,9 +1,6 @@
 package com.learning.Number250;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Program Name: leetcodes
@@ -27,12 +24,12 @@ import java.util.List;
 public class LeetCode251 {
     public static void main(String[] args) {
         int[] num1 = {1, 2, 2, 1};
-        int[] num2 = {2, 1};
+        int[] num2 = {1, 2};
         System.out.println(intersectionArray(num1, num2));
     }
 
     private static List<Integer> intersectionArray(int[] num1, int[] num2) {
-        List<Integer> list = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
         if (num1 == null || num1.length == 0) {
             return new ArrayList<>();
         }
@@ -43,16 +40,19 @@ public class LeetCode251 {
         int len1 = num1.length;
         int len2 = num2.length;
 
+
         for (int i = 0; i < len1; i++) {
-            for (int j = 0; j < len2; j++) {
-                if (num1[i] == num2[j]) {
-                    if (!list.contains(num1[i])) {
-                        list.add(num1[i]);
-                    }
-                }
+            if (!set.contains(num1[i])) {
+                set.add(num1[i]);
             }
         }
 
+        List<Integer> list = new ArrayList<>();
+        for (int j = 0; j < len2; j++) {
+            if (set.contains(num2[j])) {
+                list.add(num2[j]);
+            }
+        }
         return list;
 
     }
