@@ -31,7 +31,7 @@ import java.util.Map;
 public class LeetCode252 {
     public static void main(String[] args) {
         int[] num1 = {1, 2, 2, 1};
-        int[] num2 = {3, 4};
+        int[] num2 = {1, 2};
         System.out.println(intersectionArray(num1, num2));
     }
 
@@ -42,17 +42,12 @@ public class LeetCode252 {
             map.put(num1[i], map.getOrDefault(num1[i], 0) + 1);
         }
         List<Integer> al = new ArrayList<Integer>();
-        for (int i = 0, val; i < num2.length; i++) {
-            if (map.containsKey(num2[i]) && (val = map.get(num2[i])) > 0) {
-                al.add(num2[i]);
-                map.put(num2[i], --val);
+        for (int i : num2) {
+            if (map.containsKey(i) && map.get(i) > 0) {
+                al.add(i);
+                map.put(i, map.get(i) - 1);
             }
         }
-
-        List<Integer> result = new ArrayList<Integer>();
-        for (int i : al) {
-            result.add(i);
-        }
-        return result;
+        return al;
     }
 }
