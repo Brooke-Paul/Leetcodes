@@ -33,7 +33,7 @@ public class LeetCode258 {
 
     }
 
-    private static int superPow() {
+    private static int superPow(int a, int[] b) {
 
     }
 }
