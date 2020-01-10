@@ -30,10 +30,22 @@ package com.learning.Number250;
  */
 public class LeetCode258 {
     public static void main(String[] args) {
-
+        int a = 2;
+        int b[] = {3};
+        System.out.println(superPow(a, b));
     }
 
     private static int superPow(int a, int[] b) {
+        int res = 1;
+        for (int i = 0; i < b.length; ++i) {
+            res = pow(res, 10) * pow(a, b[i]) % 1337;
+        }
+        return res;
+    }
 
+    private static int pow(int x, int n) {
+        if (n == 0) return 1;
+        if (n == 1) return x % 1337;
+        return pow(x % 1337, n / 2) * pow(x % 1337, n - n / 2) % 1337;
     }
 }
