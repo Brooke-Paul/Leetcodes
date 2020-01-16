@@ -1,5 +1,9 @@
 package com.learning.Number250;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Program Name: leetcodes
  * <p>
@@ -28,11 +32,20 @@ package com.learning.Number250;
 public class LeetCode264 {
     public static void main(String[] args) {
         int[][] array = {{1, 5, 9}, {10, 11, 13}, {12, 13, 15}};
-        int k = 8;
+        int k = 1;
         System.out.println(findMiniEstK(array, k));
     }
 
     private static int findMiniEstK(int[][] array, int k) {
-        return 0;
+        int row = array.length;
+        int col = array[0].length;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                list.add(array[i][j]);
+            }
+        }
+        Collections.sort(list);
+        return list.get(k - 1);
     }
 }
