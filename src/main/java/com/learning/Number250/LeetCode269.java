@@ -29,7 +29,7 @@ import java.util.*;
  */
 public class LeetCode269 {
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3};
+        int[] nums = {1, 2, 3, 4};
         Solution solution = new Solution(nums);
 
         for (int i : solution.shuffle()) {
@@ -56,6 +56,15 @@ public class LeetCode269 {
             System.out.print(i);
         }
         System.out.println("");
+        for (int i : solution.shuffle()) {
+            System.out.print(i);
+        }
+        System.out.println("");
+        for (int i : solution.shuffle()) {
+            System.out.print(i);
+        }
+        System.out.println("");
+
     }
 }
 
@@ -81,13 +90,12 @@ class Solution {
         Set set = new HashSet();
         for (int i = 0; i < array.length; i++) {
             int next = random.nextInt(array.length);
-            if (!set.contains(next)) {
+            while (!set.contains(next)) {
                 set.add(next);
                 int temp = array[i];
                 array[i] = array[next];
                 array[next] = temp;
             }
-
         }
         return array;
     }
