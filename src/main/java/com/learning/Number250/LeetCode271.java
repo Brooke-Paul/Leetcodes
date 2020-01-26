@@ -24,22 +24,23 @@ import java.util.*;
  */
 public class LeetCode271 {
     public static void main(String[] args) {
-        String s = "leetcode";
+        String s = "loveleetcode";
         System.out.println(firstUniqueChar(s));
     }
 
     private static int firstUniqueChar(String s) {
         Map<Character, Integer> characterSet = new HashMap<>();
+        List<Character> list = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
+            list.add(s.charAt(i));
             characterSet.put(s.charAt(i), characterSet.getOrDefault(s.charAt(i), 0) + 1);
         }
 
         Iterator<Map.Entry<Character, Integer>> iterator = characterSet.entrySet().iterator();
 
-        while (iterator.hasNext()) {
-            Map.Entry m = iterator.next();
-            if (1 == (Integer) m.getValue()) {
-                return s.indexOf(m.getKey().toString());
+        for (Character c : list) {
+            if (characterSet.getOrDefault(c, 0) == 1) {
+                return s.indexOf(c);
             }
         }
         return -1;
