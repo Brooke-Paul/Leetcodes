@@ -34,7 +34,29 @@ package com.learning.Number250;
  */
 public class LeetCode273 {
     public static void main(String[] args) {
-
+        String s = "abc";
+        String t = "ahbgdc";
+        System.out.println(subsequence(s, t));
     }
+
+    private static boolean subsequence(String s, String t) {
+        int left = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int j = left;
+            boolean check = false;
+            for (; j < t.length(); j++) {
+                if (s.charAt(i) == t.charAt(j)) {
+                    left = j + 1;
+                    check = true;
+                    break;
+                }
+            }
+            if (j == t.length() && !check) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
