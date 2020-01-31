@@ -33,8 +33,8 @@ package com.learning.Number250;
 public class LeetCode274 {
 
     public static void main(String[] args) {
-        String s = "ababbc";
-        int k = 2;
+        String s = "aaabb";
+        int k = 3;
         System.out.println(longestSubstring(s, k));
     }
 
