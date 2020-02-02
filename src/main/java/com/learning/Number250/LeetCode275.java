@@ -39,16 +39,16 @@ public class LeetCode275 {
     public static int maxRotateFunction(int[] A) {
         int allSum = 0;
         int len = A.length;
-        int F = 0;
+        int current = 0;
         for (int i = 0; i < len; i++) {
-            F += i * A[i];
+            current += i * A[i];
             allSum += A[i];
         }
-        int max = F;
+        int max = current;
         for (int i = len - 1; i >= 1; i--) {
-            F = F + allSum - len * A[i];
-            System.out.println(F);
-            max = Math.max(F, max);
+            current = current + allSum - len * A[i];
+            System.out.println(current);
+            max = Math.max(current, max);
         }
         return max;
     }
