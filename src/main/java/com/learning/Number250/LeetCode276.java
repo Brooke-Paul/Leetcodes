@@ -1,5 +1,7 @@
 package com.learning.Number250;
 
+import java.util.Map;
+
 /**
  * Program Name: leetcodes
  * <p>
@@ -40,10 +42,18 @@ package com.learning.Number250;
  */
 public class LeetCode276 {
     public static void main(String[] args) {
-
+        int n = 7;
+        System.out.println(smallestCount(n));
     }
 
     private static int smallestCount(int n) {
-        return 0;
+        int count = 0;
+        while (n > 1) {
+            count = (n % 2 == 0) ? count : count + 1;
+            n = (n % 2 == 0) ? n : n - 1;
+            n = n / 2;
+            count++;
+        }
+        return count;
     }
 }
