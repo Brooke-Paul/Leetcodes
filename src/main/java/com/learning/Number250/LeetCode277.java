@@ -1,5 +1,9 @@
 package com.learning.Number250;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Program Name: leetcodes
  * <p>
@@ -25,7 +29,25 @@ package com.learning.Number250;
  * @version 1.0
  */
 public class LeetCode277 {
+    private static Random random = new Random();
+
     public static void main(String[] args) {
+        int[] nums = new int[]{1, 2, 3, 3, 3};
+        int target = 2;
+        System.out.println(pick(nums, target));
+    }
+
+    public static int pick(int[] array, int target) {
+        List<Integer> list = new ArrayList();
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == target) {
+                list.add(i);
+            }
+        }
+        if (list.size() == 0) {
+            return 0;
+        }
+        return list.get(random.nextInt(list.size()));
 
     }
 }
