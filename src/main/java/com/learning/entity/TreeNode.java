@@ -11,9 +11,9 @@ package com.learning.entity;
  * @version 1.0
  */
 public class TreeNode {
-    TreeNode left;
-    TreeNode right;
-    Integer val;
+    public TreeNode left;
+    public TreeNode right;
+    public Integer val;
 
     public TreeNode(int val) {
         this.val = val;
